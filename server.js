@@ -9,6 +9,8 @@ const port = 3000;
 app.use ( cors() );
 
 app.get("/pictures", dbdata.pictures);
+app.post("/register", dbdata.registerUser);
+app.get("/getUserId", dbdata.getUserId);
 app.listen(port, function(){
     console.log("Server is listening on port " + port);
 });
