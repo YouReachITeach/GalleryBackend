@@ -14,12 +14,12 @@ const connectionData = {
     }
 }
 async function registerUser(req, res) {
-    var username = req.query.username;
-    if(!username || !req.query.password){
-        res.status(400).json({ error: "Username and password are required" }).end();
-        return;
+    const { username, password } = req.body || {};
+
+    if (!username || !password) {
+        return res.status(400).json({ error: "Username and password are required" });
     }
-    var passwordHash = await bcrypt.hash(req.query.password, 10); //hash the password with a salt rounds of 10
+    var passwordHash = await bcrypt.hash(password, 10); //hash the password with a salt rounds of 10
 
     var con = mysql.createConnection(connectionData);
 
